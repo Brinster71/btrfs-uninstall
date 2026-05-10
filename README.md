@@ -118,6 +118,26 @@ RUNDLL32.EXE SETUPAPI.DLL,InstallHinfSection DefaultUninstall 132 btrfs.inf
 
 You may need to give the full path to btrfs.inf.
 
+Alternatively, run the PowerShell helper script from an elevated PowerShell
+session:
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\uninstall-winbtrfs.ps1 -Force
+```
+
+The script disables and removes the btrfs service, removes matching driver
+packages, deletes WinBtrfs shell-extension registry entries, and removes or
+schedules deletion of installed WinBtrfs binaries. Reboot Windows after it
+finishes.
+
+To build a single executable that contains the PowerShell uninstaller and INF
+files, run:
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\build-uninstall-exe.ps1
+.\uninstall-winbtrfs.exe -Force
+```
+
 You can also go to Device Manager, find "Btrfs controller" under
 "Storage volumes", right click and choose "Uninstall". Tick the checkbox to
 uninstall the driver as well, and let Windows reboot itself.
